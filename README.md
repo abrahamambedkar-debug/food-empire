@@ -1,14 +1,16 @@
-# food-empire
-🍔 Food Empire — A 2D top-down restaurant game built with Phaser.js. Cook, serve, battle, and build your food empire!
 # 🍔 Food Empire
 
 A 2D top-down restaurant management game built with **Phaser.js 3.6**.
 
-Cook 6 different dishes, serve hungry customers, hire NPC workers, battle rivals in arena mode, and upgrade your restaurant — all in your browser!
+**[🎮 Play Now](https://01a0be46-e56c-761a-b275-92fd91d47454.arena.site/)** | **[📖 Docs](#)** | **[🐛 Report Bug](https://github.com/abrahamambedkar-debug/food-empire/issues)**
 
-![Food Empire](https://img.shields.io/badge/Phaser.js-3.6-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Platform](https://img.shields.io/badge/platform-Web-orange)
+---
+
+## 📖 About
+
+Food Empire is a fast-paced restaurant simulation where you play as a chef running a busy diner. Cook 6 different dishes, serve hungry customers before they storm out, hire NPC workers to help, battle rival chefs in arena mode, and upgrade your restaurant to become the ultimate food empire.
+
+Built entirely with **vanilla JavaScript** and **Phaser.js** — no frameworks, no build tools, no external assets. Every visual is drawn with code.
 
 ---
 
@@ -59,6 +61,30 @@ Cook 6 different dishes, serve hungry customers, hire NPC workers, battle rivals
 
 ---
 
+## 🍽️ Food Menu
+
+| Dish | Emoji | Price | Cook Time |
+|------|-------|-------|-----------|
+| Burger | 🍔 | $10 | 1.5s |
+| Pizza | 🍕 | $14 | 2.5s |
+| Fries | 🍟 | $8 | 1.0s |
+| Taco | 🌮 | $12 | 1.2s |
+| Sushi | 🍣 | $18 | 3.0s |
+| Soda | 🥤 | $6 | 0.5s |
+
+---
+
+## 🚀 Upgrades
+
+| Upgrade | Cost | Effect |
+|---------|------|--------|
+| Speed Boost | $500 | +30% movement |
+| Fast Cooking | $800 | 1.5s cook time |
+| More Patience | $600 | 45s wait time |
+| Extra Table | $1000 | 5th table |
+
+---
+
 ## 🛠️ Tech Stack
 
 - **Phaser.js 3.6** — Game engine (CDN)
@@ -73,11 +99,11 @@ Cook 6 different dishes, serve hungry customers, hire NPC workers, battle rivals
 ## 📦 Installation
 
 ### Option 1: Play Online
-Just open `index.html` in any modern browser.
+**[🎮 Play Now](https://01a0be46-e56c-761a-b275-92fd91d47454.arena.site/)**
 
 ### Option 2: Local Development
 ```bash
-git clone https://github.com/[your-username]/food-empire.git
+git clone https://github.com/abrahamambedkar-debug/food-empire.git
 cd food-empire
 # Open index.html in browser
 # OR use a local server:
