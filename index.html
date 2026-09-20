@@ -2,84 +2,56 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- Mobile-friendly: lock zoom so the touch joystick feels native -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="theme-color" content="#0b101c" />
-    <title>Food Empire · a tiny Phaser.js restaurant game</title>
-    <!-- Inline SVG favicon (no external assets) -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#05070d" />
+    <meta name="description" content="Chef Wars — cook, serve and conquer in a fast-paced restaurant arcade game." />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>Chef Wars</title>
+
+    <!-- Inline SVG favicon (no external file) -->
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffd166' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.5 12.5 12 2l3.5 10.5'/%3E%3Cpath d='M5 12c-1.5 2.5-.5 6 2 7.5 2 1.2 4 .5 5-.5 1 1 3 1.7 5 .5 2.5-1.5 3.5-5 2-7.5'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffc94a' d='M7 3a4 4 0 0 0-2 7.5V21h4V10.5A4 4 0 0 0 7 3zm10 0c-2 0-3.5 2-3.5 4.5S15 12 15 12v9h4V3z'/%3E%3C/svg%3E"
     />
-    <!-- Page font (decorative, system fallback is safe offline) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap"
-      rel="stylesheet"
-    />
+
     <!-- Game styles -->
     <link rel="stylesheet" href="./style.css" />
-    <!-- Phaser.js from CDN (pinned version for stability) -->
+
+    <!-- CrazyGames SDK v3 — optional. The game detects it and degrades
+         gracefully to offline mode anywhere else (itch, your own site, local). -->
+    <script src="https://sdk.crazygames.com/crazygames-sdk-v3.js" defer></script>
+
+    <!-- Phaser 3.60 from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
   </head>
+
   <body>
-    <main class="page">
-      <!-- ── Site header ─────────────────────────────────────────────── -->
-      <header class="top">
-        <div class="brand">
-          <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M8.5 12.5 12 2l3.5 10.5" />
-            <path d="M5 12c-1.5 2.5-.5 6 2 7.5 2 1.2 4 .5 5-.5 1 1 3 1.7 5 .5 2.5-1.5 3.5-5 2-7.5" />
-          </svg>
-          <h1 class="brand-name">Food<span>Empire</span></h1>
-        </div>
-        <p class="tag">A tiny top-down restaurant shift — cook fast, serve faster, keep your reputation alive.</p>
-      </header>
+    <!-- The Phaser canvas mounts here and fills the viewport -->
+    <div id="game-container" aria-label="Chef Wars game"></div>
 
-      <!-- ── Game mount (Phaser injects the responsive canvas here) ──── -->
-      <section id="game-container" aria-label="Food Empire game canvas"></section>
+    <!-- Instant HTML splash so the very first frame is never a blank page -->
+    <div id="splash">
+      <div class="splash-logo">CHEF<span>WARS</span></div>
+      <div class="splash-bar"><i></i></div>
+      <div class="splash-tip">Loading the kitchen…</div>
+    </div>
 
-      <!-- ── Control reference (icon chips, hidden clutter-free on tiny screens) ── -->
-      <footer class="controls-bar">
-        <div class="chip">
-          <span class="keys"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span>
-          <span class="chip-label">or arrows to move</span>
-        </div>
-        <div class="chip">
-          <span class="keys"><kbd>E</kbd></span>
-          <span class="chip-label">cook · pick up · serve</span>
-        </div>
-        <div class="chip chip-hire">
-          <span class="keys"><kbd>H</kbd></span>
-          <span class="chip-label">hire NPC cook — $2000</span>
-        </div>
-        <div class="chip chip-arena">
-          <span class="keys"><kbd>B</kbd></span>
-          <span class="chip-label">arena battle</span>
-        </div>
-        <div class="chip">
-          <span class="keys"><kbd>U</kbd></span>
-          <span class="chip-label">upgrades</span>
-        </div>
-        <div class="chip">
-          <svg class="chip-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" />
-            <path d="M17 21v-8H7v8M7 3v5h8" />
-          </svg>
-          <span class="chip-label">auto-saves every 30s</span>
-        </div>
-        <div class="chip">
-          <svg class="chip-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="7" y="2.5" width="10" height="19" rx="2.5" />
-            <circle cx="12" cy="18" r="1" fill="currentColor" stroke="none" />
-          </svg>
-          <span class="chip-label">touch ready</span>
-        </div>
-      </footer>
-    </main>
+    <!-- Portrait-phone prompt -->
+    <div id="rotate">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="4" y="2" width="16" height="20" rx="3" />
+        <path d="M2 14a10 10 0 0 0 10 8" />
+        <path d="m2 14 3 2m-3-2 2-3" />
+      </svg>
+      <p>Rotate your device</p>
+      <small>Chef Wars plays best in landscape</small>
+    </div>
 
-    <!-- Game logic (loaded as a module so it runs after Phaser is ready) -->
+    <!-- Game code (ES module; Vite inlines every import into one file) -->
     <script type="module" src="./game.js"></script>
   </body>
 </html>
